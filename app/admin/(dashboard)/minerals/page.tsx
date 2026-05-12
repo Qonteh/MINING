@@ -5,16 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from '@/components/ui/table';
+import { Switch } from '@/components/ui/switch';
 import {
   Dialog,
   DialogContent,
@@ -24,225 +15,270 @@ import {
   DialogTrigger,
   DialogFooter,
 } from '@/components/ui/dialog';
-import { Plus, Pencil, Trash2, Search, Gem } from 'lucide-react';
-
-// Mock data - replace with database queries
-const initialMinerals = [
-  { id: 1, name: 'Gold Ore', category: 'Precious Metals', origin: 'South Africa', price: 1850, stock: 500, isActive: true, isFeatured: true },
-  { id: 2, name: 'Diamond Rough', category: 'Gemstones', origin: 'Botswana', price: 5200, stock: 150, isActive: true, isFeatured: true },
-  { id: 3, name: 'Copper Concentrate', category: 'Base Metals', origin: 'Chile', price: 320, stock: 2000, isActive: true, isFeatured: false },
-  { id: 4, name: 'Lithium Carbonate', category: 'Industrial', origin: 'Australia', price: 780, stock: 800, isActive: true, isFeatured: true },
-  { id: 5, name: 'Silver Bars', category: 'Precious Metals', origin: 'Mexico', price: 28, stock: 1200, isActive: true, isFeatured: false },
-  { id: 6, name: 'Emerald Raw', category: 'Gemstones', origin: 'Colombia', price: 3500, stock: 75, isActive: false, isFeatured: false },
-];
+import { Plus, Pencil, Trash2, Save, Eye, Gem, Image as ImageIcon } from 'lucide-react';
+import { defaultSiteConfig, type Mineral } from '@/lib/site-config';
+import Link from 'next/link';
 
 export default function MineralsPage() {
-  const [minerals, setMinerals] = useState(initialMinerals);
-  const [search, setSearch] = useState('');
+  const [minerals, setMinerals] = useState<Mineral[]>(defaultSiteConfig.minerals);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-  const [editingMineral, setEditingMineral] = useState<typeof initialMinerals[0] | null>(null);
+  const [editingMineral, setEditingMineral] = useState<Mineral | null>(null);
+  const [saved, setSaved] = useState(false);
+  const [newMineral, setNewMineral] = useState<Partial<Mineral>>({
+    name: '',
+    quality: '',
+    image: '/images/',
+    origin: '',
+    isVisible: true,
+  });
 
-  const filteredMinerals = minerals.filter(mineral => 
-    mineral.name.toLowerCase().includes(search.toLowerCase()) ||
-    mineral.category.toLowerCase().includes(search.toLowerCase()) ||
-    mineral.origin.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleSave = () => {
+    setSaved(true);
+    setTimeout(() => setSaved(false), 3000);
+  };
 
-  const handleDelete = (id: number) => {
+  const handleAddMineral = () => {
+    if (newMineral.name && newMineral.quality) {
+      setMinerals([
+        ...minerals,
+        {
+          id: Date.now().toString(),
+          name: newMineral.name || '',
+          quality: newMineral.quality || '',
+          image: newMineral.image || '/images/mineral.jpg',
+          origin: newMineral.origin || '',
+          isVisible: newMineral.isVisible ?? true,
+        }
+      ]);
+      setNewMineral({ name: '', quality: '', image: '/images/', origin: '', isVisible: true });
+      setIsAddDialogOpen(false);
+    }
+  };
+
+  const handleEditMineral = () => {
+    if (editingMineral) {
+      setMinerals(minerals.map(m => m.id === editingMineral.id ? editingMineral : m));
+      setEditingMineral(null);
+    }
+  };
+
+  const handleDelete = (id: string) => {
     setMinerals(minerals.filter(m => m.id !== id));
   };
 
-  const handleToggleActive = (id: number) => {
+  const handleToggleVisibility = (id: string) => {
     setMinerals(minerals.map(m => 
-      m.id === id ? { ...m, isActive: !m.isActive } : m
+      m.id === id ? { ...m, isVisible: !m.isVisible } : m
     ));
   };
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-serif font-bold text-foreground">Minerals</h1>
-          <p className="text-muted-foreground mt-1">Manage your mineral inventory and catalog</p>
+          <h1 className="text-3xl font-bold text-foreground">Minerals</h1>
+          <p className="text-muted-foreground mt-1">Manage the minerals displayed on your website</p>
         </div>
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-          <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary/90">
-              <Plus className="w-4 h-4 mr-2" />
-              Add Mineral
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-lg">
-            <DialogHeader>
-              <DialogTitle>Add New Mineral</DialogTitle>
-              <DialogDescription>Add a new mineral to your inventory catalog.</DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid gap-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="e.g., Gold Ore" />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="category">Category</Label>
-                  <Input id="category" placeholder="e.g., Precious Metals" />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="origin">Origin</Label>
-                  <Input id="origin" placeholder="e.g., South Africa" />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="price">Price per Unit ($)</Label>
-                  <Input id="price" type="number" placeholder="0.00" />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="stock">Stock Quantity</Label>
-                  <Input id="stock" type="number" placeholder="0" />
-                </div>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="description">Description</Label>
-                <Textarea id="description" placeholder="Describe the mineral..." />
-              </div>
-            </div>
-            <DialogFooter>
-              <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>Cancel</Button>
-              <Button className="bg-primary hover:bg-primary/90" onClick={() => setIsAddDialogOpen(false)}>
+        <div className="flex items-center gap-2">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/#minerals" target="_blank">
+              <Eye className="w-4 h-4 mr-2" />
+              Preview
+            </Link>
+          </Button>
+          <Button size="sm" onClick={handleSave}>
+            <Save className="w-4 h-4 mr-2" />
+            {saved ? 'Saved!' : 'Save Changes'}
+          </Button>
+          <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+            <DialogTrigger asChild>
+              <Button size="sm">
+                <Plus className="w-4 h-4 mr-2" />
                 Add Mineral
               </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Add New Mineral</DialogTitle>
+                <DialogDescription>Add a mineral card to your website</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 py-4">
+                <div className="space-y-2">
+                  <Label>Mineral Name</Label>
+                  <Input
+                    value={newMineral.name}
+                    onChange={(e) => setNewMineral({ ...newMineral, name: e.target.value })}
+                    placeholder="e.g., Tanzanite"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Quality Description</Label>
+                  <Input
+                    value={newMineral.quality}
+                    onChange={(e) => setNewMineral({ ...newMineral, quality: e.target.value })}
+                    placeholder="e.g., Premium Quality"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Origin</Label>
+                  <Input
+                    value={newMineral.origin}
+                    onChange={(e) => setNewMineral({ ...newMineral, origin: e.target.value })}
+                    placeholder="e.g., Tanzania"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Image Path</Label>
+                  <Input
+                    value={newMineral.image}
+                    onChange={(e) => setNewMineral({ ...newMineral, image: e.target.value })}
+                    placeholder="/images/mineral.jpg"
+                  />
+                  <p className="text-xs text-muted-foreground">Upload to /public/images/ folder</p>
+                </div>
+              </div>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>Cancel</Button>
+                <Button onClick={handleAddMineral}>Add Mineral</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="border-border/50">
-          <CardHeader className="pb-2">
-            <CardDescription>Total Minerals</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{minerals.length}</div>
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-foreground">{minerals.length}</div>
+            <p className="text-xs text-muted-foreground">Total Minerals</p>
           </CardContent>
         </Card>
         <Card className="border-border/50">
-          <CardHeader className="pb-2">
-            <CardDescription>Active</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-chart-3">{minerals.filter(m => m.isActive).length}</div>
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-green-500">{minerals.filter(m => m.isVisible).length}</div>
+            <p className="text-xs text-muted-foreground">Visible on Site</p>
           </CardContent>
         </Card>
         <Card className="border-border/50">
-          <CardHeader className="pb-2">
-            <CardDescription>Featured</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-primary">{minerals.filter(m => m.isFeatured).length}</div>
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-muted-foreground">{minerals.filter(m => !m.isVisible).length}</div>
+            <p className="text-xs text-muted-foreground">Hidden</p>
           </CardContent>
         </Card>
         <Card className="border-border/50">
-          <CardHeader className="pb-2">
-            <CardDescription>Categories</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{new Set(minerals.map(m => m.category)).size}</div>
+          <CardContent className="pt-6">
+            <div className="text-2xl font-bold text-primary">{new Set(minerals.map(m => m.origin)).size}</div>
+            <p className="text-xs text-muted-foreground">Origins</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Search and Filter */}
-      <Card className="border-border/50">
-        <CardContent className="pt-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input 
-                placeholder="Search minerals..." 
-                className="pl-9"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Minerals Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {minerals.map((mineral) => (
+          <Card key={mineral.id} className={`border-border/50 ${!mineral.isVisible ? 'opacity-60' : ''}`}>
+            <CardContent className="p-4">
+              <div className="flex items-start gap-4">
+                <div className="w-20 h-20 rounded-lg bg-muted flex items-center justify-center shrink-0 overflow-hidden">
+                  {mineral.image ? (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <Gem className="w-8 h-8 text-primary" />
+                    </div>
+                  ) : (
+                    <ImageIcon className="w-8 h-8 text-muted-foreground" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="font-semibold text-foreground truncate">{mineral.name}</h3>
+                    <Switch
+                      checked={mineral.isVisible}
+                      onCheckedChange={() => handleToggleVisibility(mineral.id)}
+                    />
+                  </div>
+                  <p className="text-sm text-muted-foreground">{mineral.quality}</p>
+                  <p className="text-xs text-muted-foreground mt-1">Origin: {mineral.origin}</p>
+                  <p className="text-xs text-muted-foreground truncate">Image: {mineral.image}</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-end gap-2 mt-4 pt-4 border-t border-border/50">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setEditingMineral(mineral)}
+                    >
+                      <Pencil className="w-4 h-4 mr-1" />
+                      Edit
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Edit Mineral</DialogTitle>
+                      <DialogDescription>Update mineral details</DialogDescription>
+                    </DialogHeader>
+                    {editingMineral && (
+                      <div className="space-y-4 py-4">
+                        <div className="space-y-2">
+                          <Label>Mineral Name</Label>
+                          <Input
+                            value={editingMineral.name}
+                            onChange={(e) => setEditingMineral({ ...editingMineral, name: e.target.value })}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Quality</Label>
+                          <Input
+                            value={editingMineral.quality}
+                            onChange={(e) => setEditingMineral({ ...editingMineral, quality: e.target.value })}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Origin</Label>
+                          <Input
+                            value={editingMineral.origin}
+                            onChange={(e) => setEditingMineral({ ...editingMineral, origin: e.target.value })}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label>Image Path</Label>
+                          <Input
+                            value={editingMineral.image}
+                            onChange={(e) => setEditingMineral({ ...editingMineral, image: e.target.value })}
+                          />
+                        </div>
+                      </div>
+                    )}
+                    <DialogFooter>
+                      <Button variant="outline" onClick={() => setEditingMineral(null)}>Cancel</Button>
+                      <Button onClick={handleEditMineral}>Save Changes</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-destructive hover:bg-destructive/10"
+                  onClick={() => handleDelete(mineral.id)}
+                >
+                  <Trash2 className="w-4 h-4 mr-1" />
+                  Delete
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
-      {/* Minerals Table */}
-      <Card className="border-border/50">
-        <CardHeader>
-          <CardTitle>Mineral Inventory</CardTitle>
-          <CardDescription>A list of all minerals in your catalog</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Mineral</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Origin</TableHead>
-                  <TableHead className="text-right">Price</TableHead>
-                  <TableHead className="text-right">Stock</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredMinerals.map((mineral) => (
-                  <TableRow key={mineral.id}>
-                    <TableCell>
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                          <Gem className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <p className="font-medium">{mineral.name}</p>
-                          {mineral.isFeatured && (
-                            <Badge variant="secondary" className="text-xs">Featured</Badge>
-                          )}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell>{mineral.category}</TableCell>
-                    <TableCell>{mineral.origin}</TableCell>
-                    <TableCell className="text-right font-medium">${mineral.price.toLocaleString()}</TableCell>
-                    <TableCell className="text-right">{mineral.stock.toLocaleString()} kg</TableCell>
-                    <TableCell>
-                      <Badge 
-                        variant={mineral.isActive ? "default" : "secondary"}
-                        className={mineral.isActive ? "bg-chart-3 hover:bg-chart-3/80" : ""}
-                      >
-                        {mineral.isActive ? 'Active' : 'Inactive'}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Button 
-                          variant="ghost" 
-                          size="icon"
-                          className="text-muted-foreground hover:text-foreground"
-                        >
-                          <Pencil className="w-4 h-4" />
-                        </Button>
-                        <Button 
-                          variant="ghost" 
-                          size="icon"
-                          className="text-muted-foreground hover:text-destructive"
-                          onClick={() => handleDelete(mineral.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+      {/* Help */}
+      <Card className="border-primary/30 bg-primary/5">
+        <CardContent className="py-4">
+          <p className="text-sm text-muted-foreground">
+            <strong className="text-foreground">Tip:</strong> Toggle the switch to show/hide minerals on your website. Upload mineral images to the /public/images/ folder and use the path like /images/filename.jpg
+          </p>
         </CardContent>
       </Card>
     </div>

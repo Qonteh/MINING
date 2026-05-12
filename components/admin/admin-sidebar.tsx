@@ -5,16 +5,19 @@ import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard,
+  FileEdit,
+  Image,
   Gem,
   Briefcase,
   MessageSquare,
-  Globe,
-  BarChart3,
-  Settings,
+  Phone,
+  Palette,
   LogOut,
   ChevronLeft,
   ChevronRight,
   Menu,
+  BarChart3,
+  Globe,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { logoutAction } from '@/app/admin/actions';
@@ -22,13 +25,66 @@ import { useState } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const navigation = [
-  { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { name: 'Minerals', href: '/admin/minerals', icon: Gem },
-  { name: 'Services', href: '/admin/services', icon: Briefcase },
-  { name: 'Inquiries', href: '/admin/inquiries', icon: MessageSquare },
-  { name: 'Locations', href: '/admin/locations', icon: Globe },
-  { name: 'Analytics', href: '/admin/analytics', icon: BarChart3 },
-  { name: 'Settings', href: '/admin/settings', icon: Settings },
+  { 
+    name: 'Dashboard', 
+    href: '/admin', 
+    icon: LayoutDashboard,
+    description: 'Overview & activity'
+  },
+  { 
+    name: 'Hero Section', 
+    href: '/admin/hero', 
+    icon: Image,
+    description: 'Main banner content'
+  },
+  { 
+    name: 'About Section', 
+    href: '/admin/about', 
+    icon: FileEdit,
+    description: 'About us content'
+  },
+  { 
+    name: 'Minerals', 
+    href: '/admin/minerals', 
+    icon: Gem,
+    description: 'Manage mineral cards'
+  },
+  { 
+    name: 'Services', 
+    href: '/admin/services', 
+    icon: Briefcase,
+    description: 'Manage services'
+  },
+  { 
+    name: 'Stats & Reach', 
+    href: '/admin/stats', 
+    icon: BarChart3,
+    description: 'Stats & global reach'
+  },
+  { 
+    name: 'Contact Info', 
+    href: '/admin/contact-info', 
+    icon: Phone,
+    description: 'Phone, email, address'
+  },
+  { 
+    name: 'Messages', 
+    href: '/admin/messages', 
+    icon: MessageSquare,
+    description: 'Contact submissions'
+  },
+  { 
+    name: 'Social Links', 
+    href: '/admin/social', 
+    icon: Globe,
+    description: 'Social media links'
+  },
+  { 
+    name: 'Appearance', 
+    href: '/admin/appearance', 
+    icon: Palette,
+    description: 'Colors & fonts'
+  },
 ];
 
 interface AdminSidebarProps {
@@ -46,7 +102,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
   const SidebarContent = ({ mobile = false }: { mobile?: boolean }) => (
     <div className={cn(
       "flex flex-col h-full bg-secondary text-secondary-foreground",
-      !mobile && collapsed ? "w-16" : "w-64"
+      !mobile && collapsed ? "w-20" : "w-72"
     )}>
       {/* Header */}
       <div className="flex items-center gap-3 p-4 border-b border-border/50">
@@ -55,8 +111,8 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
         </div>
         {(!collapsed || mobile) && (
           <div className="flex-1 min-w-0">
-            <h2 className="font-serif font-semibold text-primary-foreground truncate">Gemora</h2>
-            <p className="text-xs text-muted-foreground truncate">Admin Panel</p>
+            <h2 className="font-serif font-semibold text-primary-foreground truncate">Gemora Admin</h2>
+            <p className="text-xs text-muted-foreground truncate">Website Manager</p>
           </div>
         )}
         {!mobile && (
@@ -73,6 +129,12 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
 
       {/* Navigation */}
       <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
+        <p className={cn(
+          "px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider",
+          collapsed && !mobile && "text-center"
+        )}>
+          {collapsed && !mobile ? "Nav" : "Website Sections"}
+        </p>
         {navigation.map((item) => {
           const isActive = pathname === item.href || 
             (item.href !== '/admin' && pathname.startsWith(item.href));
@@ -81,8 +143,9 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             <Link
               key={item.name}
               href={item.href}
+              title={collapsed ? item.name : undefined}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group",
                 isActive
                   ? "bg-primary text-primary-foreground shadow-md"
                   : "text-muted-foreground hover:bg-accent/10 hover:text-foreground"
@@ -90,12 +153,35 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             >
               <item.icon className="w-5 h-5 shrink-0" />
               {(!collapsed || mobile) && (
-                <span className="font-medium truncate">{item.name}</span>
+                <div className="flex-1 min-w-0">
+                  <span className="font-medium truncate block">{item.name}</span>
+                  <span className={cn(
+                    "text-xs truncate block",
+                    isActive ? "text-primary-foreground/70" : "text-muted-foreground/70"
+                  )}>
+                    {item.description}
+                  </span>
+                </div>
               )}
             </Link>
           );
         })}
       </nav>
+
+      {/* View Site Link */}
+      <div className="p-2 border-t border-border/50">
+        <Link
+          href="/"
+          target="_blank"
+          className={cn(
+            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-muted-foreground hover:bg-accent/10 hover:text-foreground transition-all",
+            collapsed && !mobile && "justify-center"
+          )}
+        >
+          <Globe className="w-5 h-5 shrink-0" />
+          {(!collapsed || mobile) && <span className="font-medium">View Website</span>}
+        </Link>
+      </div>
 
       {/* User Section */}
       <div className="p-2 border-t border-border/50">
@@ -139,7 +225,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="p-0 w-64 bg-secondary">
+            <SheetContent side="left" className="p-0 w-72 bg-secondary">
               <SidebarContent mobile />
             </SheetContent>
           </Sheet>
