@@ -1,0 +1,307 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* 
+   * GEMORA MINERALS - DIAMOND & GOLD LUXURY THEME
+   * Inspired by: Brilliant diamonds, polished gold, precious gems
+   * Palette: Pearl White, Antique Gold, Warm Cream, Deep Navy (accent)
+   */
+  
+  /* Base - Pearl White (like brilliant diamond) */
+  --background: oklch(0.98 0.003 90);
+  --foreground: oklch(0.20 0.02 60);
+  
+  /* Cards - Soft Cream */
+  --card: oklch(0.99 0.002 85);
+  --card-foreground: oklch(0.20 0.02 60);
+  --popover: oklch(0.99 0.002 85);
+  --popover-foreground: oklch(0.20 0.02 60);
+  
+  /* Primary - Rich Antique Gold */
+  --primary: oklch(0.62 0.16 70);
+  --primary-foreground: oklch(0.99 0.002 85);
+  
+  /* Secondary - Deep Navy (for contrast sections) */
+  --secondary: oklch(0.18 0.04 250);
+  --secondary-foreground: oklch(0.98 0.003 90);
+  
+  /* Muted - Warm Sand */
+  --muted: oklch(0.94 0.01 80);
+  --muted-foreground: oklch(0.45 0.02 60);
+  
+  /* Accent - Honey Gold */
+  --accent: oklch(0.75 0.13 75);
+  --accent-foreground: oklch(0.18 0.02 60);
+  
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.003 90);
+  
+  /* Borders - Soft gold tint */
+  --border: oklch(0.88 0.02 75);
+  --input: oklch(0.95 0.01 80);
+  --ring: oklch(0.62 0.16 70);
+  
+  /* Chart colors - Gemstone inspired */
+  --chart-1: oklch(0.62 0.16 70);  /* Gold */
+  --chart-2: oklch(0.50 0.15 250); /* Sapphire */
+  --chart-3: oklch(0.55 0.14 155); /* Emerald */
+  --chart-4: oklch(0.60 0.12 35);  /* Copper */
+  --chart-5: oklch(0.70 0.10 85);  /* Amber */
+  
+  --radius: 0.625rem;
+  
+  /* Sidebar */
+  --sidebar: oklch(0.96 0.005 85);
+  --sidebar-foreground: oklch(0.20 0.02 60);
+  --sidebar-primary: oklch(0.62 0.16 70);
+  --sidebar-primary-foreground: oklch(0.99 0.002 85);
+  --sidebar-accent: oklch(0.92 0.01 80);
+  --sidebar-accent-foreground: oklch(0.20 0.02 60);
+  --sidebar-border: oklch(0.88 0.02 75);
+  --sidebar-ring: oklch(0.62 0.16 70);
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes gold-shine {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.62 0.16 70 / 0.2); }
+  50% { box-shadow: 0 0 40px oklch(0.62 0.16 70 / 0.4); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 3s ease-in-out infinite;
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #996515 0%, #c9a227 25%, #daa520 50%, #c9a227 75%, #996515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold shine button effect */
+.btn-gold-shine {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, oklch(0.58 0.14 68), oklch(0.65 0.15 72), oklch(0.58 0.14 68));
+}
+
+.btn-gold-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: gold-shine 3s ease-in-out infinite;
+}
+
+/* Subtle gold glow for images */
+.glow-gold {
+  box-shadow: 
+    0 10px 40px oklch(0.62 0.16 70 / 0.2),
+    0 0 80px oklch(0.62 0.16 70 / 0.1);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 
+    0 20px 50px oklch(0.62 0.16 70 / 0.15),
+    0 10px 20px oklch(0.20 0.02 60 / 0.08);
+}
+
+/* Luxury card with gold border */
+.card-luxury {
+  background: linear-gradient(145deg, oklch(0.99 0.002 85), oklch(0.97 0.005 82));
+  border: 1px solid oklch(0.88 0.03 75);
+  box-shadow: 0 4px 20px oklch(0.62 0.16 70 / 0.08);
+  transition: all 0.4s ease;
+}
+
+.card-luxury:hover {
+  border-color: oklch(0.62 0.16 70 / 0.5);
+  box-shadow: 
+    0 8px 30px oklch(0.62 0.16 70 / 0.15),
+    0 0 0 1px oklch(0.62 0.16 70 / 0.1);
+}
+
+/* Gold border gradient */
+.border-gold {
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(oklch(0.99 0.002 85), oklch(0.99 0.002 85)) padding-box,
+    linear-gradient(135deg, oklch(0.62 0.16 70), oklch(0.75 0.13 75), oklch(0.62 0.16 70)) border-box;
+}
+
+/* Section with navy background */
+.section-navy {
+  background: linear-gradient(180deg, oklch(0.16 0.04 250), oklch(0.20 0.05 250));
+}
+
+/* Diamond sparkle effect on images */
+.diamond-sparkle {
+  position: relative;
+}
+
+.diamond-sparkle::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, white 0%, transparent 70%);
+  border-radius: 50%;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Image overlay for mineral cards */
+.mineral-overlay {
+  background: linear-gradient(180deg, transparent 40%, oklch(0.18 0.04 250 / 0.95) 100%);
+}
+
+/* Section divider */
+.section-divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, oklch(0.62 0.16 70), transparent);
+}
+
+/* Custom scrollbar - gold themed */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(0.95 0.01 80);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, oklch(0.62 0.16 70), oklch(0.55 0.14 68));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, oklch(0.68 0.15 72), oklch(0.60 0.14 70));
+}
+
+/* Selection - gold tint */
+::selection {
+  background: oklch(0.62 0.16 70 / 0.2);
+  color: oklch(0.20 0.02 60);
+}

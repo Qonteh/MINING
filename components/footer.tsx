@@ -1,0 +1,149 @@
+import Link from "next/link"
+import { Diamond, Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
+
+const quickLinks = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About Us" },
+  { href: "#minerals", label: "Our Minerals" },
+  { href: "#services", label: "Services" },
+  { href: "#global", label: "Global Reach" },
+  { href: "#contact", label: "Contact" },
+]
+
+const minerals = [
+  "Tanzanite",
+  "Gold Ore",
+  "Chromite",
+  "Kyanite",
+  "Copper Ore",
+  "Ruby",
+]
+
+const socialLinks = [
+  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+]
+
+export function Footer() {
+  return (
+    <footer className="bg-secondary text-secondary-foreground border-t border-secondary-foreground/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Brand */}
+          <div className="space-y-6">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="relative">
+                <Diamond className="h-8 w-8 text-primary group-hover:text-accent transition-colors" />
+                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-lg font-bold text-secondary-foreground tracking-wide">GEMORA</span>
+                <span className="text-[10px] text-secondary-foreground/60 tracking-[0.2em] -mt-1">INTERNATIONAL</span>
+              </div>
+            </Link>
+            <p className="text-secondary-foreground/70 text-sm leading-relaxed">
+              Your trusted partner for premium quality minerals. Delivering excellence worldwide since 2009.
+            </p>
+            <div className="flex gap-3">
+              {socialLinks.map((social, index) => (
+                <Link
+                  key={index}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="p-2.5 bg-secondary-foreground/5 border border-secondary-foreground/10 rounded-lg hover:bg-primary/20 hover:border-primary/50 transition-all group"
+                >
+                  <social.icon className="h-5 w-5 text-secondary-foreground/70 group-hover:text-primary transition-colors" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-bold text-secondary-foreground mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full" />
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
+              {quickLinks.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    className="text-secondary-foreground/70 hover:text-primary transition-colors text-sm inline-flex items-center gap-2 group"
+                  >
+                    <span className="w-1 h-1 bg-secondary-foreground/50 rounded-full group-hover:bg-primary transition-colors" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Our Minerals */}
+          <div>
+            <h3 className="font-bold text-secondary-foreground mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full" />
+              Our Minerals
+            </h3>
+            <ul className="space-y-3">
+              {minerals.map((mineral, index) => (
+                <li key={index}>
+                  <Link
+                    href="#minerals"
+                    className="text-secondary-foreground/70 hover:text-primary transition-colors text-sm inline-flex items-center gap-2 group"
+                  >
+                    <span className="w-1 h-1 bg-secondary-foreground/50 rounded-full group-hover:bg-primary transition-colors" />
+                    {mineral}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="font-bold text-secondary-foreground mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full" />
+              Contact Info
+            </h3>
+            <div className="space-y-4 text-sm">
+              <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
+                <p className="text-xs text-primary font-semibold mb-1">ADDRESS</p>
+                <p className="text-secondary-foreground/70">Dar es Salaam, Tanzania</p>
+              </div>
+              <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
+                <p className="text-xs text-primary font-semibold mb-1">PHONE</p>
+                <p className="text-secondary-foreground/70">+255 738 040 423</p>
+              </div>
+              <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
+                <p className="text-xs text-primary font-semibold mb-1">EMAIL</p>
+                <p className="text-secondary-foreground/70">info@gemoraminerals.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-secondary-foreground/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-secondary-foreground/60 text-sm">
+              © {new Date().getFullYear()} Gemora International. All rights reserved.
+            </p>
+            <div className="flex gap-6 text-sm">
+              <Link href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
