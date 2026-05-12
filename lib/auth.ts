@@ -1,11 +1,19 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
-import bcrypt from 'bcryptjs';
-import { queryOne } from './db';
 
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || 'gemora-minerals-admin-secret-key-change-in-production'
 );
+
+// Demo admin user - In production, connect to PostgreSQL database
+const DEMO_ADMIN = {
+  id: 1,
+  email: 'admin@gemora.com',
+  password: 'admin123',
+  name: 'Admin User',
+  role: 'admin',
+  created_at: new Date(),
+};
 
 export interface AdminUser {
   id: number;
@@ -21,14 +29,6 @@ export interface SessionPayload {
   name: string;
   role: string;
   expiresAt: Date;
-}
-
-export async function hashPassword(password: string): Promise<string> {
-  return bcrypt.hash(password, 12);
-}
-
-export async function verifyPassword(password: string, hashedPassword: string): Promise<boolean> {
-  return bcrypt.compare(password, hashedPassword);
 }
 
 export async function createSession(user: AdminUser): Promise<string> {
@@ -78,17 +78,17 @@ export async function deleteSession(): Promise<void> {
 }
 
 export async function authenticateAdmin(email: string, password: string): Promise<AdminUser | null> {
-  const user = await queryOne<AdminUser & { password_hash: string }>(
-    'SELECT id, email, name, role, password_hash, created_at FROM admin_users WHERE email = $1',
-    [email]
-  );
+  // Demo mode - check against demo credentials
+  // In production, replace this with database query
+  if (email === DEMO_ADMIN.email && password === DEMO_ADMIN.password) {
+    return {
+      id: DEMO_ADMIN.id,
+      email: DEMO_ADMIN.email,
+      name: DEMO_ADMIN.name,
+      role: DEMO_ADMIN.role,
+      created_at: DEMO_ADMIN.created_at,
+    };
+  }
   
-  if (!user) return null;
-  
-  const isValid = await verifyPassword(password, user.password_hash);
-  if (!isValid) return null;
-  
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { password_hash, ...adminUser } = user;
-  return adminUser;
+  return null;
 }
