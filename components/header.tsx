@@ -43,17 +43,18 @@ export function Header({ siteTitle }: HeaderProps) {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative h-12 w-12">
+            <div className="relative h-14 w-14 sm:h-16 sm:w-16">
               <Image
                 src="/logo.png"
                 alt="AXXEN International Logo"
                 fill
                 className="object-contain"
+                priority
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-foreground tracking-wide">{brandName.toUpperCase()}</span>
-              <span className="text-[10px] text-muted-foreground tracking-[0.25em] -mt-0.5">INTERNATIONAL</span>
+              <span className="text-xl sm:text-2xl font-bold text-primary tracking-wide">{brandName.toUpperCase()}</span>
+              <span className="text-[9px] sm:text-[10px] text-primary/70 tracking-[0.2em] sm:tracking-[0.25em] -mt-0.5 font-medium">INTERNATIONAL GROUP</span>
             </div>
           </Link>
 

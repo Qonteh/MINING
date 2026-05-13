@@ -5,63 +5,62 @@
 
 :root {
   /* 
-   * AXXEN INTERNATIONAL - DIAMOND & GOLD LUXURY THEME
-   * Inspired by: Brilliant diamonds, polished gold, precious gems
-   * Palette: Pure White, Royal Blue (logo), Gold accents
+   * AXXEN INTERNATIONAL - CLEAN BLUE & WHITE THEME
+   * Using the AXXEN logo colors: Pure White + Royal Blue
    */
   
-  /* Base - Pure White (like the logo background) */
+  /* Base - Pure White */
   --background: oklch(1 0 0);
-  --foreground: oklch(0.20 0.04 250);
+  --foreground: oklch(0.25 0.05 250);
   
   /* Cards - Pure White */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.20 0.04 250);
+  --card-foreground: oklch(0.25 0.05 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.20 0.04 250);
+  --popover-foreground: oklch(0.25 0.05 250);
   
-  /* Primary - Royal Blue (matching AXXEN logo) */
-  --primary: oklch(0.45 0.18 250);
+  /* Primary - AXXEN Logo Blue (#1e3a8a) */
+  --primary: oklch(0.37 0.15 260);
   --primary-foreground: oklch(1 0 0);
   
-  /* Secondary - Deep Navy (for contrast sections) */
-  --secondary: oklch(0.18 0.04 250);
-  --secondary-foreground: oklch(0.98 0.003 90);
+  /* Secondary - Same AXXEN Blue (for footer/dark sections) */
+  --secondary: oklch(0.30 0.12 260);
+  --secondary-foreground: oklch(1 0 0);
   
-  /* Muted - Light Gray */
-  --muted: oklch(0.96 0.005 250);
-  --muted-foreground: oklch(0.45 0.02 250);
+  /* Muted - Very Light Blue tint */
+  --muted: oklch(0.97 0.01 250);
+  --muted-foreground: oklch(0.50 0.03 250);
   
-  /* Accent - Rich Gold */
-  --accent: oklch(0.70 0.15 75);
-  --accent-foreground: oklch(0.18 0.02 60);
+  /* Accent - Lighter Blue for highlights */
+  --accent: oklch(0.55 0.15 260);
+  --accent-foreground: oklch(1 0 0);
   
   --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0.003 90);
   
-  /* Borders - Light blue tint */
-  --border: oklch(0.90 0.02 250);
-  --input: oklch(0.96 0.01 250);
-  --ring: oklch(0.45 0.18 250);
+  /* Borders - Light Blue tint */
+  --border: oklch(0.92 0.02 250);
+  --input: oklch(0.97 0.01 250);
+  --ring: oklch(0.37 0.15 260);
   
-  /* Chart colors - AXXEN brand inspired */
-  --chart-1: oklch(0.45 0.18 250);  /* Royal Blue */
-  --chart-2: oklch(0.70 0.15 75);   /* Gold */
-  --chart-3: oklch(0.55 0.14 155);  /* Emerald */
-  --chart-4: oklch(0.55 0.18 250);  /* Light Blue */
-  --chart-5: oklch(0.65 0.12 75);   /* Light Gold */
+  /* Chart colors - AXXEN Blue variations */
+  --chart-1: oklch(0.37 0.15 260);
+  --chart-2: oklch(0.45 0.15 260);
+  --chart-3: oklch(0.55 0.14 260);
+  --chart-4: oklch(0.65 0.12 260);
+  --chart-5: oklch(0.75 0.08 260);
   
   --radius: 0.625rem;
   
   /* Sidebar - Blue theme for admin */
-  --sidebar: oklch(0.97 0.005 250);
-  --sidebar-foreground: oklch(0.20 0.04 250);
-  --sidebar-primary: oklch(0.45 0.18 250);
+  --sidebar: oklch(0.98 0.005 250);
+  --sidebar-foreground: oklch(0.25 0.05 250);
+  --sidebar-primary: oklch(0.37 0.15 260);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.94 0.02 250);
-  --sidebar-accent-foreground: oklch(0.20 0.04 250);
-  --sidebar-border: oklch(0.90 0.02 250);
-  --sidebar-ring: oklch(0.45 0.18 250);
+  --sidebar-accent: oklch(0.95 0.02 250);
+  --sidebar-accent-foreground: oklch(0.25 0.05 250);
+  --sidebar-border: oklch(0.92 0.02 250);
+  --sidebar-ring: oklch(0.37 0.15 260);
 }
 
 @theme inline {
@@ -152,9 +151,9 @@ html {
   50% { transform: translateY(-10px); }
 }
 
-@keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 20px oklch(0.62 0.16 70 / 0.2); }
-  50% { box-shadow: 0 0 40px oklch(0.62 0.16 70 / 0.4); }
+@keyframes pulse-blue {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.37 0.15 260 / 0.2); }
+  50% { box-shadow: 0 0 40px oklch(0.37 0.15 260 / 0.4); }
 }
 
 .animate-fade-up {
@@ -169,8 +168,8 @@ html {
   animation: float 6s ease-in-out infinite;
 }
 
-.animate-pulse-gold {
-  animation: pulse-gold 3s ease-in-out infinite;
+.animate-pulse-blue {
+  animation: pulse-blue 3s ease-in-out infinite;
 }
 
 /* Staggered animations */
@@ -180,22 +179,22 @@ html {
 .stagger-4 { animation-delay: 0.4s; }
 .stagger-5 { animation-delay: 0.5s; }
 
-/* Gold text gradient */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #996515 0%, #c9a227 25%, #daa520 50%, #c9a227 75%, #996515 100%);
+/* Blue text gradient */
+.text-blue-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1e3a8a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Gold shine button effect */
-.btn-gold-shine {
+/* Blue shine button effect */
+.btn-blue-shine {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, oklch(0.58 0.14 68), oklch(0.65 0.15 72), oklch(0.58 0.14 68));
+  background: linear-gradient(135deg, oklch(0.37 0.15 260), oklch(0.45 0.15 260), oklch(0.37 0.15 260));
 }
 
-.btn-gold-shine::before {
+.btn-blue-shine::before {
   content: '';
   position: absolute;
   top: 0;
@@ -206,11 +205,11 @@ html {
   animation: gold-shine 3s ease-in-out infinite;
 }
 
-/* Subtle gold glow for images */
-.glow-gold {
+/* Subtle blue glow for images */
+.glow-blue {
   box-shadow: 
-    0 10px 40px oklch(0.62 0.16 70 / 0.2),
-    0 0 80px oklch(0.62 0.16 70 / 0.1);
+    0 10px 40px oklch(0.37 0.15 260 / 0.2),
+    0 0 80px oklch(0.37 0.15 260 / 0.1);
 }
 
 /* Card hover effect */
@@ -221,36 +220,36 @@ html {
 .card-hover:hover {
   transform: translateY(-6px);
   box-shadow: 
-    0 20px 50px oklch(0.62 0.16 70 / 0.15),
-    0 10px 20px oklch(0.20 0.02 60 / 0.08);
+    0 20px 50px oklch(0.37 0.15 260 / 0.15),
+    0 10px 20px oklch(0.20 0.05 260 / 0.08);
 }
 
-/* Luxury card with gold border */
-.card-luxury {
-  background: linear-gradient(145deg, oklch(0.99 0.002 85), oklch(0.97 0.005 82));
-  border: 1px solid oklch(0.88 0.03 75);
-  box-shadow: 0 4px 20px oklch(0.62 0.16 70 / 0.08);
+/* Modern card with blue border */
+.card-modern {
+  background: linear-gradient(145deg, oklch(1 0 0), oklch(0.98 0.005 250));
+  border: 1px solid oklch(0.92 0.02 250);
+  box-shadow: 0 4px 20px oklch(0.37 0.15 260 / 0.08);
   transition: all 0.4s ease;
 }
 
-.card-luxury:hover {
-  border-color: oklch(0.62 0.16 70 / 0.5);
+.card-modern:hover {
+  border-color: oklch(0.37 0.15 260 / 0.5);
   box-shadow: 
-    0 8px 30px oklch(0.62 0.16 70 / 0.15),
-    0 0 0 1px oklch(0.62 0.16 70 / 0.1);
+    0 8px 30px oklch(0.37 0.15 260 / 0.15),
+    0 0 0 1px oklch(0.37 0.15 260 / 0.1);
 }
 
-/* Gold border gradient */
-.border-gold {
+/* Blue border gradient */
+.border-blue {
   border: 2px solid transparent;
   background: 
-    linear-gradient(oklch(0.99 0.002 85), oklch(0.99 0.002 85)) padding-box,
-    linear-gradient(135deg, oklch(0.62 0.16 70), oklch(0.75 0.13 75), oklch(0.62 0.16 70)) border-box;
+    linear-gradient(oklch(1 0 0), oklch(1 0 0)) padding-box,
+    linear-gradient(135deg, oklch(0.37 0.15 260), oklch(0.55 0.15 260), oklch(0.37 0.15 260)) border-box;
 }
 
-/* Section with navy background */
-.section-navy {
-  background: linear-gradient(180deg, oklch(0.16 0.04 250), oklch(0.20 0.05 250));
+/* Section with blue background */
+.section-blue {
+  background: linear-gradient(180deg, oklch(0.30 0.12 260), oklch(0.37 0.15 260));
 }
 
 /* Diamond sparkle effect on images */
@@ -272,36 +271,36 @@ html {
 
 /* Image overlay for mineral cards */
 .mineral-overlay {
-  background: linear-gradient(180deg, transparent 40%, oklch(0.18 0.04 250 / 0.95) 100%);
+  background: linear-gradient(180deg, transparent 40%, oklch(0.30 0.12 260 / 0.95) 100%);
 }
 
-/* Section divider */
+/* Section divider - blue */
 .section-divider {
   width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, transparent, oklch(0.62 0.16 70), transparent);
+  background: linear-gradient(90deg, transparent, oklch(0.37 0.15 260), transparent);
 }
 
-/* Custom scrollbar - blue themed */
+/* Custom scrollbar - AXXEN blue themed */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: oklch(0.96 0.01 250);
+  background: oklch(0.97 0.01 250);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, oklch(0.45 0.18 250), oklch(0.38 0.15 250));
+  background: linear-gradient(180deg, oklch(0.37 0.15 260), oklch(0.30 0.12 260));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, oklch(0.50 0.18 250), oklch(0.42 0.15 250));
+  background: linear-gradient(180deg, oklch(0.42 0.15 260), oklch(0.35 0.13 260));
 }
 
-/* Selection - blue tint */
+/* Selection - AXXEN blue tint */
 ::selection {
-  background: oklch(0.45 0.18 250 / 0.2);
-  color: oklch(0.20 0.04 250);
+  background: oklch(0.37 0.15 260 / 0.25);
+  color: oklch(1 0 0);
 }

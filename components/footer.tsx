@@ -36,13 +36,13 @@ export function Footer({ settings }: FooterProps) {
   const brandName = settings?.site_title?.split('|')[0]?.trim() || "AXXEN"
 
   return (
-    <footer className="bg-secondary text-secondary-foreground border-t border-secondary-foreground/10">
+    <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative h-10 w-10">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="relative h-14 w-14 bg-white rounded-lg p-1">
                 <Image
                   src="/logo.png"
                   alt="AXXEN International Logo"
@@ -51,11 +51,11 @@ export function Footer({ settings }: FooterProps) {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-secondary-foreground tracking-wide">{brandName.toUpperCase()}</span>
-                <span className="text-[10px] text-secondary-foreground/60 tracking-[0.2em] -mt-1">INTERNATIONAL</span>
+                <span className="text-xl font-bold text-white tracking-wide">{brandName.toUpperCase()}</span>
+                <span className="text-[10px] text-white/70 tracking-[0.2em] -mt-1 font-medium">INTERNATIONAL GROUP</span>
               </div>
             </Link>
-            <p className="text-secondary-foreground/70 text-sm leading-relaxed">
+            <p className="text-primary-foreground/80 text-sm leading-relaxed">
               {settings?.site_description || "Your trusted partner for premium quality minerals. Delivering excellence worldwide since 2009."}
             </p>
             <div className="flex gap-3">
@@ -64,9 +64,9 @@ export function Footer({ settings }: FooterProps) {
                   key={index}
                   href={social.href}
                   aria-label={social.label}
-                  className="p-2.5 bg-secondary-foreground/5 border border-secondary-foreground/10 rounded-lg hover:bg-primary/20 hover:border-primary/50 transition-all group"
+                  className="p-2.5 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-all group"
                 >
-                  <social.icon className="h-5 w-5 text-secondary-foreground/70 group-hover:text-primary transition-colors" />
+                  <social.icon className="h-5 w-5 text-white/80 group-hover:text-white transition-colors" />
                 </Link>
               ))}
             </div>
@@ -74,8 +74,8 @@ export function Footer({ settings }: FooterProps) {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-secondary-foreground mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 bg-primary rounded-full" />
+            <h3 className="font-bold text-white mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-white/50 rounded-full" />
               Quick Links
             </h3>
             <ul className="space-y-3">
@@ -83,9 +83,9 @@ export function Footer({ settings }: FooterProps) {
                 <li key={index}>
                   <Link
                     href={link.href}
-                    className="text-secondary-foreground/70 hover:text-primary transition-colors text-sm inline-flex items-center gap-2 group"
+                    className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 bg-secondary-foreground/50 rounded-full group-hover:bg-primary transition-colors" />
+                    <span className="w-1 h-1 bg-white/40 rounded-full group-hover:bg-white transition-colors" />
                     {link.label}
                   </Link>
                 </li>
@@ -95,8 +95,8 @@ export function Footer({ settings }: FooterProps) {
 
           {/* Our Minerals */}
           <div>
-            <h3 className="font-bold text-secondary-foreground mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 bg-primary rounded-full" />
+            <h3 className="font-bold text-white mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-white/50 rounded-full" />
               Our Minerals
             </h3>
             <ul className="space-y-3">
@@ -104,9 +104,9 @@ export function Footer({ settings }: FooterProps) {
                 <li key={index}>
                   <Link
                     href="#minerals"
-                    className="text-secondary-foreground/70 hover:text-primary transition-colors text-sm inline-flex items-center gap-2 group"
+                    className="text-white/70 hover:text-white transition-colors text-sm inline-flex items-center gap-2 group"
                   >
-                    <span className="w-1 h-1 bg-secondary-foreground/50 rounded-full group-hover:bg-primary transition-colors" />
+                    <span className="w-1 h-1 bg-white/40 rounded-full group-hover:bg-white transition-colors" />
                     {mineral}
                   </Link>
                 </li>
@@ -116,22 +116,22 @@ export function Footer({ settings }: FooterProps) {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-bold text-secondary-foreground mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 bg-primary rounded-full" />
+            <h3 className="font-bold text-white mb-6 flex items-center gap-2">
+              <span className="w-2 h-2 bg-white/50 rounded-full" />
               Contact Info
             </h3>
             <div className="space-y-4 text-sm">
-              <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
-                <p className="text-xs text-primary font-semibold mb-1">ADDRESS</p>
-                <p className="text-secondary-foreground/70">{settings?.company_address || "Dar es Salaam, Tanzania"}</p>
+              <div className="p-3 bg-white/10 rounded-lg border border-white/20">
+                <p className="text-xs text-white/60 font-semibold mb-1">ADDRESS</p>
+                <p className="text-white/90">{settings?.company_address || "Dar es Salaam, Tanzania"}</p>
               </div>
-              <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
-                <p className="text-xs text-primary font-semibold mb-1">PHONE</p>
-                <p className="text-secondary-foreground/70">{settings?.company_phone || "+255 738 040 423"}</p>
+              <div className="p-3 bg-white/10 rounded-lg border border-white/20">
+                <p className="text-xs text-white/60 font-semibold mb-1">PHONE</p>
+                <p className="text-white/90">{settings?.company_phone || "+255 738 040 423"}</p>
               </div>
-              <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
-                <p className="text-xs text-primary font-semibold mb-1">EMAIL</p>
-                <p className="text-secondary-foreground/70">{settings?.company_email || "info@gemoraminerals.com"}</p>
+              <div className="p-3 bg-white/10 rounded-lg border border-white/20">
+                <p className="text-xs text-white/60 font-semibold mb-1">EMAIL</p>
+                <p className="text-white/90">{settings?.company_email || "info@axxeninternational.com"}</p>
               </div>
             </div>
           </div>
@@ -139,17 +139,17 @@ export function Footer({ settings }: FooterProps) {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-secondary-foreground/10">
+      <div className="border-t border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-secondary-foreground/60 text-sm">
+            <p className="text-white/60 text-sm">
               © {new Date().getFullYear()} AXXEN International. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <Link href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+              <Link href="#" className="text-white/60 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
+              <Link href="#" className="text-white/60 hover:text-white transition-colors">
                 Terms of Service
               </Link>
             </div>

@@ -125,7 +125,7 @@ export default function AdminLayout({
           fixed lg:relative h-full z-50
           ${sidebarOpen ? 'w-72' : 'w-20'} 
           ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          bg-gradient-to-b from-[#1e3a5f] via-[#1a365d] to-[#0f2847]
+          bg-primary
           text-white transition-all duration-300 ease-in-out
           shadow-2xl
         `}

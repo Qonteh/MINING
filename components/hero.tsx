@@ -80,7 +80,7 @@ export function Hero({ section }: HeroProps) {
 
           {/* Right Image */}
           <div className="relative animate-fade-in stagger-2">
-            <div className="relative aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl glow-gold">
+            <div className="relative aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl glow-blue">
               <Image
                 src={imageUrl}
                 alt="Premium Amethyst Crystal"
