@@ -89,7 +89,7 @@ export function GlobalReach({ section }: GlobalReachProps) {
             <p className="text-primary font-semibold tracking-widest text-sm mb-4">
               {title}
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-foreground leading-tight mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-6">
               {subtitle}
             </h2>
             <p className="text-secondary-foreground/70 text-lg mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">

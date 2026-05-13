@@ -73,7 +73,7 @@ export function Contact({ section, settings }: ContactProps) {
           <p className="text-primary font-semibold tracking-widest text-sm mb-4">
             {subtitle}
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary">
             {title}
           </h2>
           <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-6" />
@@ -92,7 +92,7 @@ export function Contact({ section, settings }: ContactProps) {
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="font-bold text-foreground mb-1">Phone</p>
+                  <p className="font-bold text-primary mb-1">Phone</p>
                   <p className="text-muted-foreground">{settings?.company_phone || "+255 738 040 423"}</p>
                 </div>
               </div>
@@ -102,7 +102,7 @@ export function Contact({ section, settings }: ContactProps) {
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="font-bold text-foreground mb-1">Email</p>
+                  <p className="font-bold text-primary mb-1">Email</p>
                   <p className="text-muted-foreground">{settings?.company_email || "info@gemoraminerals.com"}</p>
                 </div>
               </div>
@@ -112,7 +112,7 @@ export function Contact({ section, settings }: ContactProps) {
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="font-bold text-foreground mb-1">Address</p>
+                  <p className="font-bold text-primary mb-1">Address</p>
                   <p className="text-muted-foreground">{settings?.company_address || "Dar es Salaam, Tanzania"}</p>
                 </div>
               </div>

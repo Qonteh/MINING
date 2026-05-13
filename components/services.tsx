@@ -63,7 +63,7 @@ export function Services({ section }: ServicesProps) {
           <p className="text-primary font-semibold tracking-widest text-sm mb-4">
             {title}
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
             {subtitle}
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
@@ -92,7 +92,7 @@ export function Services({ section }: ServicesProps) {
                 <div className="p-4 bg-primary/10 rounded-2xl w-fit mb-6 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                   <service.icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
+                <h3 className="text-xl font-bold text-primary mb-3">{service.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
                 
                 {/* Bottom line accent */}

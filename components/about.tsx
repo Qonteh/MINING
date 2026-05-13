@@ -52,7 +52,7 @@ export function About({ section }: AboutProps) {
               <p className="text-primary font-semibold tracking-widest text-sm mb-4">
                 {title}
               </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary leading-tight">
                 {subtitle}
               </h2>
             </div>
@@ -70,7 +70,7 @@ export function About({ section }: AboutProps) {
 
           {/* Right Content with Image and Feature Cards */}
           <div className="relative">
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl glow-gold">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl glow-blue">
               <Image
                 src={imageUrl}
                 alt="Premium Amethyst Crystal"
