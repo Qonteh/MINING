@@ -7,61 +7,61 @@
   /* 
    * AXXEN INTERNATIONAL - DIAMOND & GOLD LUXURY THEME
    * Inspired by: Brilliant diamonds, polished gold, precious gems
-   * Palette: Pearl White, Antique Gold, Warm Cream, Deep Navy (accent)
+   * Palette: Pure White, Royal Blue (logo), Gold accents
    */
   
-  /* Base - Pearl White (like brilliant diamond) */
-  --background: oklch(0.98 0.003 90);
-  --foreground: oklch(0.20 0.02 60);
+  /* Base - Pure White (like the logo background) */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.20 0.04 250);
   
-  /* Cards - Soft Cream */
-  --card: oklch(0.99 0.002 85);
-  --card-foreground: oklch(0.20 0.02 60);
-  --popover: oklch(0.99 0.002 85);
-  --popover-foreground: oklch(0.20 0.02 60);
+  /* Cards - Pure White */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.04 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.04 250);
   
-  /* Primary - Rich Antique Gold */
-  --primary: oklch(0.62 0.16 70);
-  --primary-foreground: oklch(0.99 0.002 85);
+  /* Primary - Royal Blue (matching AXXEN logo) */
+  --primary: oklch(0.45 0.18 250);
+  --primary-foreground: oklch(1 0 0);
   
   /* Secondary - Deep Navy (for contrast sections) */
   --secondary: oklch(0.18 0.04 250);
   --secondary-foreground: oklch(0.98 0.003 90);
   
-  /* Muted - Warm Sand */
-  --muted: oklch(0.94 0.01 80);
-  --muted-foreground: oklch(0.45 0.02 60);
+  /* Muted - Light Gray */
+  --muted: oklch(0.96 0.005 250);
+  --muted-foreground: oklch(0.45 0.02 250);
   
-  /* Accent - Honey Gold */
-  --accent: oklch(0.75 0.13 75);
+  /* Accent - Rich Gold */
+  --accent: oklch(0.70 0.15 75);
   --accent-foreground: oklch(0.18 0.02 60);
   
   --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0.003 90);
   
-  /* Borders - Soft gold tint */
-  --border: oklch(0.88 0.02 75);
-  --input: oklch(0.95 0.01 80);
-  --ring: oklch(0.62 0.16 70);
+  /* Borders - Light blue tint */
+  --border: oklch(0.90 0.02 250);
+  --input: oklch(0.96 0.01 250);
+  --ring: oklch(0.45 0.18 250);
   
-  /* Chart colors - Gemstone inspired */
-  --chart-1: oklch(0.62 0.16 70);  /* Gold */
-  --chart-2: oklch(0.50 0.15 250); /* Sapphire */
-  --chart-3: oklch(0.55 0.14 155); /* Emerald */
-  --chart-4: oklch(0.60 0.12 35);  /* Copper */
-  --chart-5: oklch(0.70 0.10 85);  /* Amber */
+  /* Chart colors - AXXEN brand inspired */
+  --chart-1: oklch(0.45 0.18 250);  /* Royal Blue */
+  --chart-2: oklch(0.70 0.15 75);   /* Gold */
+  --chart-3: oklch(0.55 0.14 155);  /* Emerald */
+  --chart-4: oklch(0.55 0.18 250);  /* Light Blue */
+  --chart-5: oklch(0.65 0.12 75);   /* Light Gold */
   
   --radius: 0.625rem;
   
-  /* Sidebar */
-  --sidebar: oklch(0.96 0.005 85);
-  --sidebar-foreground: oklch(0.20 0.02 60);
-  --sidebar-primary: oklch(0.62 0.16 70);
-  --sidebar-primary-foreground: oklch(0.99 0.002 85);
-  --sidebar-accent: oklch(0.92 0.01 80);
-  --sidebar-accent-foreground: oklch(0.20 0.02 60);
-  --sidebar-border: oklch(0.88 0.02 75);
-  --sidebar-ring: oklch(0.62 0.16 70);
+  /* Sidebar - Blue theme for admin */
+  --sidebar: oklch(0.97 0.005 250);
+  --sidebar-foreground: oklch(0.20 0.04 250);
+  --sidebar-primary: oklch(0.45 0.18 250);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.94 0.02 250);
+  --sidebar-accent-foreground: oklch(0.20 0.04 250);
+  --sidebar-border: oklch(0.90 0.02 250);
+  --sidebar-ring: oklch(0.45 0.18 250);
 }
 
 @theme inline {
@@ -282,26 +282,26 @@ html {
   background: linear-gradient(90deg, transparent, oklch(0.62 0.16 70), transparent);
 }
 
-/* Custom scrollbar - gold themed */
+/* Custom scrollbar - blue themed */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: oklch(0.95 0.01 80);
+  background: oklch(0.96 0.01 250);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, oklch(0.62 0.16 70), oklch(0.55 0.14 68));
+  background: linear-gradient(180deg, oklch(0.45 0.18 250), oklch(0.38 0.15 250));
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, oklch(0.68 0.15 72), oklch(0.60 0.14 70));
+  background: linear-gradient(180deg, oklch(0.50 0.18 250), oklch(0.42 0.15 250));
 }
 
-/* Selection - gold tint */
+/* Selection - blue tint */
 ::selection {
-  background: oklch(0.62 0.16 70 / 0.2);
-  color: oklch(0.20 0.02 60);
+  background: oklch(0.45 0.18 250 / 0.2);
+  color: oklch(0.20 0.04 250);
 }
