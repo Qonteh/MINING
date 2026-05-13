@@ -125,13 +125,13 @@ async function initDb() {
         company_phone,
         company_address
       ) VALUES (
-        'Gemora Minerals - Premium Global Mineral Solutions',
+        'AXXEN International - Premium Global Mineral Solutions',
         'Trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence.',
         '#2563eb',
         '#1e40af',
         '#f59e0b',
         'Inter, sans-serif',
-        'info@gemora.com',
+        'info@axxeninternational.com',
         '+1 (800) 123-4567',
         '123 Mineral Plaza, Global City, GC 12345'
       );
@@ -141,7 +141,7 @@ async function initDb() {
     console.log('Creating default page sections...');
     const sections = [
       { name: 'Hero', key: 'hero', title: 'CONNECTING MINERALS. POWERING POSSIBILITIES.', subtitle: 'GLOBAL MINERAL SOLUTIONS' },
-      { name: 'About', key: 'about', title: 'ABOUT GEMORA INTERNATIONAL', subtitle: 'Who We Are' },
+      { name: 'About', key: 'about', title: 'ABOUT AXXEN INTERNATIONAL', subtitle: 'Who We Are' },
       { name: 'Services', key: 'services', title: 'OUR SERVICES', subtitle: 'What We Offer' },
       { name: 'Minerals', key: 'minerals', title: 'PREMIUM MINERALS', subtitle: 'Our Catalog' },
       { name: 'Global Reach', key: 'global-reach', title: 'GLOBAL REACH', subtitle: 'Worldwide Presence' },

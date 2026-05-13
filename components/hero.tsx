@@ -18,7 +18,7 @@ interface HeroProps {
 export function Hero({ section }: HeroProps) {
   const subtitle = section?.subtitle || "GLOBAL MINERAL SOLUTIONS"
   const title = section?.title || "CONNECTING MINERALS. POWERING POSSIBILITIES."
-  const description = section?.description || "Gemora International is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence."
+  const description = section?.description || "AXXEN International is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence."
   const imageUrl = section?.image_url || "/images/hero-mineral.jpg"
   const buttonText = section?.button_text || "Explore Minerals"
   const buttonUrl = section?.button_url || "#minerals"

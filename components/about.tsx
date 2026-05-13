@@ -27,7 +27,7 @@ interface AboutProps {
 }
 
 export function About({ section }: AboutProps) {
-  const title = section?.title || "ABOUT GEMORA INTERNATIONAL"
+  const title = section?.title || "ABOUT AXXEN INTERNATIONAL"
   const subtitle = section?.subtitle || "Who We Are"
   const description =
     section?.description ||

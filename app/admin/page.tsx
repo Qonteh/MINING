@@ -39,7 +39,7 @@ export default function AdminDashboard() {
           totalContacts: contacts.length,
           unreadContacts: unreadCount,
           sections: sections.length,
-          siteTitle: settings.site_title || 'Gemora Minerals',
+          siteTitle: settings.site_title || 'AXXEN International',
         });
       } catch (error) {
         console.error('Failed to load stats:', error);

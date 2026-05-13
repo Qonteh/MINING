@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Diamond } from "lucide-react"
+import Image from "next/image"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface HeaderProps {
@@ -22,7 +23,7 @@ export function Header({ siteTitle }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  const brandName = siteTitle?.split('|')[0]?.trim() || "GEMORA"
+  const brandName = siteTitle?.split('|')[0]?.trim() || "AXXEN"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,9 +43,13 @@ export function Header({ siteTitle }: HeaderProps) {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <Diamond className="h-9 w-9 text-primary group-hover:text-accent transition-colors duration-300" />
-              <div className="absolute inset-0 bg-primary/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="relative h-12 w-12">
+              <Image
+                src="/logo.png"
+                alt="AXXEN International Logo"
+                fill
+                className="object-contain"
+              />
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold text-foreground tracking-wide">{brandName.toUpperCase()}</span>

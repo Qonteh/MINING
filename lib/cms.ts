@@ -36,16 +36,16 @@ export interface CmsPayload {
 }
 
 const defaultSettings: CmsSettings = {
-  site_title: 'Gemora Minerals | Premium Global Mineral Solutions',
+  site_title: 'AXXEN International | Premium Global Mineral Solutions',
   site_description:
-    'Gemora Minerals is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence.',
+    'AXXEN International is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence.',
   primary_color: '#c9a227',
   secondary_color: '#1e2b4a',
   accent_color: '#daa520',
   logo_url: '',
   favicon_url: '',
   font_family: 'Inter, sans-serif',
-  company_email: 'info@gemoraminerals.com',
+  company_email: 'info@axxeninternational.com',
   company_phone: '+255 738 040 423',
   company_address: 'Dar es Salaam, Tanzania',
 };

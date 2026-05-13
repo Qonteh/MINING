@@ -14,8 +14,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Gemora Minerals | Premium Global Mineral Solutions',
-  description: 'Gemora Minerals is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence.',
+  title: 'AXXEN International | Premium Global Mineral Solutions',
+  description: 'AXXEN International is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence.',
   generator: 'v0.app',
   icons: {
     icon: [

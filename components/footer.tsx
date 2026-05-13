@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Diamond, Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
+import Image from "next/image"
+import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
 import type { CmsSettings } from "@/lib/cms"
 
 const quickLinks = [
@@ -32,7 +33,7 @@ interface FooterProps {
 }
 
 export function Footer({ settings }: FooterProps) {
-  const brandName = settings?.site_title?.split('|')[0]?.trim() || "GEMORA"
+  const brandName = settings?.site_title?.split('|')[0]?.trim() || "AXXEN"
 
   return (
     <footer className="bg-secondary text-secondary-foreground border-t border-secondary-foreground/10">
@@ -41,9 +42,13 @@ export function Footer({ settings }: FooterProps) {
           {/* Brand */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative">
-                <Diamond className="h-8 w-8 text-primary group-hover:text-accent transition-colors" />
-                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative h-10 w-10">
+                <Image
+                  src="/logo.png"
+                  alt="AXXEN International Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold text-secondary-foreground tracking-wide">{brandName.toUpperCase()}</span>
@@ -138,7 +143,7 @@ export function Footer({ settings }: FooterProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-secondary-foreground/60 text-sm">
-              © {new Date().getFullYear()} Gemora International. All rights reserved.
+              © {new Date().getFullYear()} AXXEN International. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
               <Link href="#" className="text-secondary-foreground/60 hover:text-primary transition-colors">
