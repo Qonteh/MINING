@@ -1,4 +1,7 @@
+import Link from "next/link"
 import { Search, Shield, Truck, FileText, Package, Headphones } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import type { CmsSection } from "@/lib/cms"
 
 const services = [
   {
@@ -33,7 +36,19 @@ const services = [
   },
 ]
 
-export function Services() {
+interface ServicesProps {
+  section?: CmsSection
+}
+
+export function Services({ section }: ServicesProps) {
+  const title = section?.title || "OUR SERVICES"
+  const subtitle = section?.subtitle || "COMPREHENSIVE MINERAL SOLUTIONS"
+  const description =
+    section?.description ||
+    "From sourcing to delivery, we provide end-to-end services to ensure your mineral supply chain runs smoothly."
+  const buttonText = section?.button_text || "Contact Team"
+  const buttonUrl = section?.button_url || "#contact"
+
   return (
     <section id="services" className="py-24 relative overflow-hidden">
       {/* Background gradient */}
@@ -46,17 +61,18 @@ export function Services() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
           <p className="text-primary font-semibold tracking-widest text-sm mb-4">
-            OUR SERVICES
+            {title}
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            COMPREHENSIVE
-            <br />
-            <span className="text-gold-gradient">MINERAL SOLUTIONS</span>
+            {subtitle}
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            From sourcing to delivery, we provide end-to-end services to ensure your mineral supply chain runs smoothly.
+            {description}
           </p>
           <div className="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-8" />
+          <Button asChild className="mt-8 bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Link href={buttonUrl}>{buttonText}</Link>
+          </Button>
         </div>
 
         {/* Services Grid */}

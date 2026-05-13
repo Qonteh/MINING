@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Diamond, Shield, Globe, Leaf } from "lucide-react"
+import type { CmsSection } from "@/lib/cms"
 
 const trustBadges = [
   { icon: Diamond, label: "PREMIUM", sublabel: "QUALITY" },
@@ -10,7 +11,18 @@ const trustBadges = [
   { icon: Leaf, label: "ETHICAL &", sublabel: "SUSTAINABLE" },
 ]
 
-export function Hero() {
+interface HeroProps {
+  section?: CmsSection
+}
+
+export function Hero({ section }: HeroProps) {
+  const subtitle = section?.subtitle || "GLOBAL MINERAL SOLUTIONS"
+  const title = section?.title || "CONNECTING MINERALS. POWERING POSSIBILITIES."
+  const description = section?.description || "Gemora International is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence."
+  const imageUrl = section?.image_url || "/images/hero-mineral.jpg"
+  const buttonText = section?.button_text || "Explore Minerals"
+  const buttonUrl = section?.button_url || "#minerals"
+
   return (
     <section id="home" className="relative min-h-screen pt-20 overflow-hidden">
       {/* Background gradient */}
@@ -28,22 +40,20 @@ export function Hero() {
           <div className="space-y-8">
             <div className="space-y-4">
               <p className="text-primary font-semibold tracking-widest text-sm animate-fade-up">
-                GLOBAL MINERAL SOLUTIONS
+                {subtitle}
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight animate-fade-up stagger-1">
-                CONNECTING MINERALS.
-                <br />
-                <span className="text-primary">POWERING POSSIBILITIES.</span>
+                {title}
               </h1>
               <p className="text-muted-foreground text-lg max-w-lg leading-relaxed animate-fade-up stagger-2">
-                Gemora International is a trusted mineral dealer delivering premium quality minerals with integrity, reliability, and global excellence.
+                {description}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-4 animate-fade-up stagger-3">
               <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground group relative overflow-hidden">
-                <Link href="#minerals">
-                  <span className="relative z-10">Explore Minerals</span>
+                <Link href={buttonUrl}>
+                  <span className="relative z-10">{buttonText}</span>
                   <span className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
               </Button>
@@ -72,7 +82,7 @@ export function Hero() {
           <div className="relative animate-fade-in stagger-2">
             <div className="relative aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl glow-gold">
               <Image
-                src="/images/hero-mineral.jpg"
+                src={imageUrl}
                 alt="Premium Amethyst Crystal"
                 fill
                 className="object-cover"

@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Leaf, CheckCircle, Truck } from "lucide-react"
+import type { CmsSection } from "@/lib/cms"
 
 const features = [
   {
@@ -21,7 +22,20 @@ const features = [
   },
 ]
 
-export function About() {
+interface AboutProps {
+  section?: CmsSection
+}
+
+export function About({ section }: AboutProps) {
+  const title = section?.title || "ABOUT GEMORA INTERNATIONAL"
+  const subtitle = section?.subtitle || "Who We Are"
+  const description =
+    section?.description ||
+    "We source, trade, and supply high-quality minerals to industries worldwide. Our commitment to ethical sourcing, quality assurance, and long-term partnerships sets us apart in the global market."
+  const imageUrl = section?.image_url || "/images/amethyst.jpg"
+  const buttonText = section?.button_text || "Learn More"
+  const buttonUrl = section?.button_url || "#services"
+
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       {/* Background decorative elements */}
@@ -36,21 +50,19 @@ export function About() {
           <div className="space-y-8">
             <div>
               <p className="text-primary font-semibold tracking-widest text-sm mb-4">
-                ABOUT GEMORA INTERNATIONAL
+                {title}
               </p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                BUILT ON TRUST.
-                <br />
-                <span className="text-gold-gradient">FOCUSED ON EXCELLENCE.</span>
+                {subtitle}
               </h2>
             </div>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              We source, trade, and supply high-quality minerals to industries worldwide. Our commitment to ethical sourcing, quality assurance, and long-term partnerships sets us apart in the global market.
+              {description}
             </p>
             <div className="h-px w-24 bg-gradient-to-r from-primary to-transparent" />
             <Button asChild className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground group transition-all duration-300">
-              <Link href="#services">
-                <span>Learn More</span>
+              <Link href={buttonUrl}>
+                <span>{buttonText}</span>
                 <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </Button>
@@ -60,7 +72,7 @@ export function About() {
           <div className="relative">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl glow-gold">
               <Image
-                src="/images/amethyst.jpg"
+                src={imageUrl}
                 alt="Premium Amethyst Crystal"
                 fill
                 className="object-cover"

@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import type { CmsSection } from "@/lib/cms"
 
 const minerals = [
   {
@@ -37,7 +38,21 @@ const minerals = [
   },
 ]
 
-export function Minerals() {
+interface MineralsProps {
+  section?: CmsSection
+}
+
+export function Minerals({ section }: MineralsProps) {
+  const title = section?.title || "OUR MINERALS"
+  const subtitle = section?.subtitle || "PREMIUM MINERALS. GLOBAL DEMAND."
+  const buttonText = section?.button_text || "View All Minerals"
+  const buttonUrl = section?.button_url || "#contact"
+  const heroImage = section?.image_url
+
+  const displayMinerals = heroImage
+    ? minerals.map((item, index) => (index === 0 ? { ...item, image: heroImage } : item))
+    : minerals
+
   return (
     <section id="minerals" className="py-24 relative overflow-hidden bg-secondary">
       {/* Background pattern */}
@@ -57,17 +72,15 @@ export function Minerals() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
             <p className="text-primary font-semibold tracking-widest text-sm mb-4">
-              OUR MINERALS
+              {title}
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-foreground">
-              PREMIUM MINERALS.
-              <br />
-              <span className="text-primary">GLOBAL DEMAND.</span>
+              {subtitle}
             </h2>
           </div>
           <Button asChild className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground self-start md:self-auto group transition-all duration-300">
-            <Link href="#contact">
-              <span>View All Minerals</span>
+            <Link href={buttonUrl}>
+              <span>{buttonText}</span>
               <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </Button>
@@ -75,7 +88,7 @@ export function Minerals() {
 
         {/* Minerals Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
-          {minerals.map((mineral, index) => (
+          {displayMinerals.map((mineral, index) => (
             <div
               key={index}
               className="group relative overflow-hidden rounded-2xl bg-secondary-foreground/5 border border-secondary-foreground/10 hover:border-primary/40 transition-all duration-500 card-hover"

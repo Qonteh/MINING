@@ -5,6 +5,10 @@ import Link from "next/link"
 import { Menu, X, Diamond } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
+interface HeaderProps {
+  siteTitle?: string
+}
+
 const navLinks = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About Us" },
@@ -14,9 +18,11 @@ const navLinks = [
   { href: "#contact", label: "Contact" },
 ]
 
-export function Header() {
+export function Header({ siteTitle }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+
+  const brandName = siteTitle?.split('|')[0]?.trim() || "GEMORA"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +47,7 @@ export function Header() {
               <div className="absolute inset-0 bg-primary/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-foreground tracking-wide">GEMORA</span>
+              <span className="text-xl font-bold text-foreground tracking-wide">{brandName.toUpperCase()}</span>
               <span className="text-[10px] text-muted-foreground tracking-[0.25em] -mt-0.5">INTERNATIONAL</span>
             </div>
           </Link>

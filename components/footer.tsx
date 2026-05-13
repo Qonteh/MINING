@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Diamond, Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
+import type { CmsSettings } from "@/lib/cms"
 
 const quickLinks = [
   { href: "#home", label: "Home" },
@@ -26,7 +27,13 @@ const socialLinks = [
   { icon: Instagram, href: "#", label: "Instagram" },
 ]
 
-export function Footer() {
+interface FooterProps {
+  settings?: CmsSettings
+}
+
+export function Footer({ settings }: FooterProps) {
+  const brandName = settings?.site_title?.split('|')[0]?.trim() || "GEMORA"
+
   return (
     <footer className="bg-secondary text-secondary-foreground border-t border-secondary-foreground/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -39,12 +46,12 @@ export function Footer() {
                 <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-secondary-foreground tracking-wide">GEMORA</span>
+                <span className="text-lg font-bold text-secondary-foreground tracking-wide">{brandName.toUpperCase()}</span>
                 <span className="text-[10px] text-secondary-foreground/60 tracking-[0.2em] -mt-1">INTERNATIONAL</span>
               </div>
             </Link>
             <p className="text-secondary-foreground/70 text-sm leading-relaxed">
-              Your trusted partner for premium quality minerals. Delivering excellence worldwide since 2009.
+              {settings?.site_description || "Your trusted partner for premium quality minerals. Delivering excellence worldwide since 2009."}
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social, index) => (
@@ -111,15 +118,15 @@ export function Footer() {
             <div className="space-y-4 text-sm">
               <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
                 <p className="text-xs text-primary font-semibold mb-1">ADDRESS</p>
-                <p className="text-secondary-foreground/70">Dar es Salaam, Tanzania</p>
+                <p className="text-secondary-foreground/70">{settings?.company_address || "Dar es Salaam, Tanzania"}</p>
               </div>
               <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
                 <p className="text-xs text-primary font-semibold mb-1">PHONE</p>
-                <p className="text-secondary-foreground/70">+255 738 040 423</p>
+                <p className="text-secondary-foreground/70">{settings?.company_phone || "+255 738 040 423"}</p>
               </div>
               <div className="p-3 bg-secondary-foreground/5 rounded-lg border border-secondary-foreground/10">
                 <p className="text-xs text-primary font-semibold mb-1">EMAIL</p>
-                <p className="text-secondary-foreground/70">info@gemoraminerals.com</p>
+                <p className="text-secondary-foreground/70">{settings?.company_email || "info@gemoraminerals.com"}</p>
               </div>
             </div>
           </div>

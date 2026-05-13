@@ -1,7 +1,20 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import type { CmsSection } from "@/lib/cms"
 
-export function GlobalReach() {
+interface GlobalReachProps {
+  section?: CmsSection
+}
+
+export function GlobalReach({ section }: GlobalReachProps) {
+  const title = section?.title || "GLOBAL REACH"
+  const subtitle = section?.subtitle || "DELIVERING VALUE ACROSS THE WORLD."
+  const description =
+    section?.description ||
+    "With a strong global network, we connect quality minerals from reliable sources to industries that build the future. From our base in Tanzania, we reach every corner of the globe."
+  const buttonText = section?.button_text || "Our Global Reach"
+  const buttonUrl = section?.button_url || "#contact"
+
   return (
     <section id="global" className="py-24 relative overflow-hidden bg-secondary">
       {/* Background Pattern - World Map Dots */}
@@ -74,19 +87,17 @@ export function GlobalReach() {
           {/* Left Content */}
           <div className="text-center lg:text-left">
             <p className="text-primary font-semibold tracking-widest text-sm mb-4">
-              GLOBAL REACH
+              {title}
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary-foreground leading-tight mb-6">
-              DELIVERING VALUE
-              <br />
-              <span className="text-primary">ACROSS THE WORLD.</span>
+              {subtitle}
             </h2>
             <p className="text-secondary-foreground/70 text-lg mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-              With a strong global network, we connect quality minerals from reliable sources to industries that build the future. From our base in Tanzania, we reach every corner of the globe.
+              {description}
             </p>
             <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground group">
-              <Link href="#contact">
-                Our Global Reach
+              <Link href={buttonUrl}>
+                {buttonText}
                 <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
             </Button>
